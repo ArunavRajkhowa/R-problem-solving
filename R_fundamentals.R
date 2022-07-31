@@ -73,3 +73,59 @@ for (i in 1:4){
 #solution
 
 primes=c(2,3,5,7,11,13,17,19,23,29,31,37,41,43,47) #given
+for(i in 48:100){
+  temp=i%%primes #remainder
+
+  condition=(temp==0) #returns 1D:boolean T:temp==0. else F
+  print(temp) 
+  print (condition)
+  print(sum(condition))
+  if(sum(condition)==0){print(i)} #sum of T . All F
+}
+
+
+
+
+
+
+#Problem 4
+#Find out , how many cars are there are in the dataset mtcars which have 
+#automatic transmission, number
+#of forward gears higher than 3 and below average mileage.List their names.
+#[ calculate average mileage from
+#the data itself]. To find out which variable in the data represent mentioned 
+#above information do ?mtcars
+
+df=mtcars
+#am->0:automatic
+#gear ->3
+#avg mileage -> mean
+avg=mean(df$mpg)
+df_new= df[df$mpg<avg & df$gear>3 & df$am ==0, ]
+View(df_new) #rownames(df_new) to get the row names
+
+
+
+
+
+#problem 5
+#There is no native function in R to calculate mode for a variable.
+#The function “mode” returns storage
+#mode of an object, not the statistical mode that we discussed in the class.
+#write a function which returns modes of a character vector.
+#Test that on the following vectors
+set.seed(2)
+x=sample(letters[1:5],50,replace=T)
+y=sample(letters[1:3],50,replace=T)
+#Result will be as following:
+  ## [1] "e"
+  ## [1] "a"
+
+
+mymode=function(x){
+  t=table(x) #returns element + occurence count
+  result=names(t)[which(t==max(t))]  
+  return(result)
+}
+mymode(x)
+mymode(y)
